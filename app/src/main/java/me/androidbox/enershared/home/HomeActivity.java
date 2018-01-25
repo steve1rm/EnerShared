@@ -1,7 +1,9 @@
-package me.androidbox.enershared;
+package me.androidbox.enershared.home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import me.androidbox.enershared.R;
 
 public class HomeActivity extends AppCompatActivity {
 
