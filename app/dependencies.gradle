@@ -1,0 +1,35 @@
+def dependencyGroup(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+def logging = dependencyGroup {
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+}
+
+def supportLibraries = dependencyGroup {
+    def supportVersion = "27.0.2"
+
+    implementation 'com.android.support:appcompat-v7:' + supportVersion
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-v4:' + supportVersion
+    implementation 'com.android.support:recyclerview-v7:' + supportVersion
+}
+
+def uiTesting = dependencyGroup {
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+def unitTesting = dependencyGroup {
+    testImplementation 'junit:junit:4.12'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    supportLibraries()
+    uiTesting()
+    unitTesting()
+    logging
+}
