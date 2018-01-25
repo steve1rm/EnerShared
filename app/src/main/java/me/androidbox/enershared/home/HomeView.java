@@ -29,5 +29,4 @@ public class HomeView extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_view, container, false);
     }
-
 }
