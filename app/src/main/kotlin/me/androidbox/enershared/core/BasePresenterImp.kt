@@ -6,7 +6,6 @@ import java.lang.ref.WeakReference
 open class BasePresenterImp<V>: BasePresenter<V> {
     private var viewReference: WeakReference<V>? = null
 
-
     override fun attachView(view: V) {
         viewReference = WeakReference(view)
     }
