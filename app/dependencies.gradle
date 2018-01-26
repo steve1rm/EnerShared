@@ -23,6 +23,7 @@ def uiTesting = dependencyGroup {
 
 def unitTesting = dependencyGroup {
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.jacoco:org.jacoco.core:0.8.0'
 }
 
 dependencies {
