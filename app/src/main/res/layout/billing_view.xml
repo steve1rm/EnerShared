@@ -9,7 +9,7 @@
         android:id="@+id/rvBilling"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/btnConfirmBilling"
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirmBilling"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,12 +17,13 @@
         app:layout_constraintHorizontal_weight="1"
         tools:listitem="@layout/billing_item" />
 
+
     <Button
         android:id="@+id/btnConfirmBilling"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnCancelBilling"
+        app:layout_constraintEnd_toStartOf="@+id/btnCancelBilling"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Confirm" />
@@ -36,5 +37,6 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/btnConfirmBilling"
         tools:text="Cancel" />
+
 
 </android.support.constraint.ConstraintLayout>
