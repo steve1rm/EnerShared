@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".trading.TradingActivity" />
+        <activity android:name=".billing.BillingActivity"></activity>
     </application>
 
 </manifest>
