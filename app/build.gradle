@@ -38,23 +38,13 @@ android {
         }
     }
 }
-task codeCoverageReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-
-    reports {
-        xml.enabled true
-        html.enabled false
-        csv.enabled false
-    }
+jacoco {
+    toolVersion = "0.8.0"
 }
+
 apply from: "dependencies.gradle"
-repositories {
-    mavenCentral()
-}
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
