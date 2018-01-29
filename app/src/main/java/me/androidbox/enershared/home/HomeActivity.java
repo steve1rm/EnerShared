@@ -1,7 +1,8 @@
 package me.androidbox.enershared.home;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +20,6 @@ import me.androidbox.enershared.trading.TradingView;
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -30,18 +30,15 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.homeDrawerLayout);
-        navigationView = findViewById(R.id.nvHome);
+        final NavigationView navigationView = findViewById(R.id.nvHome);
         setupDrawerContent(navigationView);
 
-/*
-        if(savedInstanceState == null) {
-            final FragmentTransaction fragmentTransaction
-                    = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.home_view_container, HomeView.newInstance(), HomeView.TAG);
-            fragmentTransaction.commit();
-        }
-*/
+        drawerLayout = findViewById(R.id.homeDrawerLayout);
+        actionBarDrawerToggle = setupDrawerToggle();
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
+        commitFragmentTransaction(HomeView.newInstance());
+        setTitle(R.string.home);
     }
 
     @Override
@@ -53,15 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setupDrawerContent(final NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                item -> {
-                    selectDrawerItem(item);
-                    return true;
-                }
-        );
     }
 
     public void selectDrawerItem(final MenuItem menuItem) {
@@ -81,13 +69,49 @@ public class HomeActivity extends AppCompatActivity {
                 break;
         }
 
-        final FragmentTransaction fragmentTransaction
-                = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.home_view_container, fragment, fragment.getTag());
-        fragmentTransaction.commit();
+        commitFragmentTransaction(fragment);
 
         menuItem.setCheckable(true);
         setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
+    }
+
+    private void commitFragmentTransaction(final Fragment fragment) {
+        final FragmentTransaction fragmentTransaction
+                = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.home_view_container, fragment, fragment.getTag());
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void setupDrawerContent(final NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                item -> {
+                    selectDrawerItem(item);
+                    return true;
+                }
+        );
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        return new ActionBarDrawerToggle(
+                HomeActivity.this,
+                drawerLayout,
+                toolbar,
+                R.string.drawer_open,
+                R.string.drawer_close);
     }
 }

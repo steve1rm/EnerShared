@@ -4,4 +4,7 @@
     <string name="billing">Billing</string>
     <string name="home">Home</string>
     <string name="engershared">EngerShared</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
+
