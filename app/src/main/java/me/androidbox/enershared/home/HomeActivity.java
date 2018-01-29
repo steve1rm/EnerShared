@@ -38,7 +38,6 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         commitFragmentTransaction(HomeView.newInstance());
-        setTitle(R.string.home);
     }
 
     @Override
