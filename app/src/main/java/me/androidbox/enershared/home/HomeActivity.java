@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         actionBarDrawerToggle = setupDrawerToggle();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
-        commitFragmentTransaction(HomeView.newInstance());
+        commitFragmentTransaction(HomeView.newInstance(), HomeView.TAG);
     }
 
     @Override
@@ -53,32 +53,36 @@ public class HomeActivity extends AppCompatActivity {
 
     public void selectDrawerItem(final MenuItem menuItem) {
         Fragment fragment;
+        String tag;
 
         switch(menuItem.getItemId()) {
             case R.id.menuBilling:
                 fragment = BillingView.newInstance();
+                tag = BillingView.TAG;
                 break;
 
             case R.id.menuTrading:
                 fragment = TradingView.newInstance();
+                tag = TradingView.TAG;
                 break;
 
             default:
                 fragment = HomeView.newInstance();
+                tag = HomeView.TAG;
                 break;
         }
 
-        commitFragmentTransaction(fragment);
+        commitFragmentTransaction(fragment, tag);
 
         menuItem.setCheckable(true);
         setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
     }
 
-    private void commitFragmentTransaction(final Fragment fragment) {
+    private void commitFragmentTransaction(final Fragment fragment, final String tag) {
         final FragmentTransaction fragmentTransaction
                 = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.home_view_container, fragment, fragment.getTag());
+                fragmentTransaction.replace(R.id.home_view_container, fragment, tag);
         fragmentTransaction.commit();
     }
 

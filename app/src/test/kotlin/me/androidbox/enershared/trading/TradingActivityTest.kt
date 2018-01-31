@@ -1,32 +1,34 @@
 package me.androidbox.enershared.trading
 
-import me.androidbox.enershared.billing.BillingView
 import org.hamcrest.core.Is.`is`
 import org.hamcrest.core.IsNull.notNullValue
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.robolectric.Robolectric
+import org.robolectric.android.controller.ActivityController
 import support.BaseRobolectricTestRunner
 
 class TradingActivityTest: BaseRobolectricTestRunner() {
-    private lateinit var tradingActivity: TradingActivity
+    private lateinit var activityController: ActivityController<TradingActivity>
 
     @Before
     fun setup() {
-        tradingActivity = Robolectric.setupActivity(TradingActivity::class.java)
+        activityController = Robolectric.buildActivity(TradingActivity::class.java)
+        activityController.create().start()
     }
 
     @Test
     fun testTradingActivityIsNotNullValue() {
-        assertThat(tradingActivity, `is`(notNullValue()))
+        assertThat(activityController, `is`(notNullValue()))
     }
 
     @Test
     fun testTradingFragmentHasStarted() {
-        val actualFragment = tradingActivity.supportFragmentManager.findFragmentByTag(TradingView.TAG)
+        val actualFragment = activityController.get()
+                .supportFragmentManager.findFragmentByTag(TradingView.TAG)
 
-        assertThat(actualFragment.tag, `is`(TradingView::class.java.name))
+        assertThat(actualFragment.tag, `is`(TradingView.TAG))
 
     }
 }

@@ -6,6 +6,7 @@ import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.robolectric.Robolectric
+import org.robolectric.android.controller.ActivityController
 import support.BaseRobolectricTestRunner
 
 class BillingActivityTest: BaseRobolectricTestRunner() {
@@ -13,7 +14,10 @@ class BillingActivityTest: BaseRobolectricTestRunner() {
 
     @Before
     fun setup() {
-        billingActivity = Robolectric.setupActivity(BillingActivity::class.java)
+        billingActivity = Robolectric.buildActivity(BillingActivity::class.java)
+                .create()
+                .start()
+                .get()
     }
 
     @Test
@@ -23,8 +27,10 @@ class BillingActivityTest: BaseRobolectricTestRunner() {
 
     @Test
     fun testBillingFragmentHasStarted() {
-        val actualFragment = billingActivity.supportFragmentManager.findFragmentByTag(BillingView.TAG)
+        val actualFragment = billingActivity
+                .supportFragmentManager
+                .findFragmentByTag(BillingView.TAG)
 
-        assertThat(actualFragment.tag, `is`(BillingView::class.java.name))
+        assertThat(actualFragment.tag, `is`(BillingView.TAG))
     }
 }
