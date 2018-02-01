@@ -38,4 +38,3 @@ junitJacoco {
     includeNoLocationClasses = true // type boolean
 }
 apply from: "dependencies.gradle"
-
