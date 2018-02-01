@@ -13,7 +13,7 @@ import me.androidbox.enershared.R;
  * A simple {@link Fragment} subclass.
  */
 public class HomeView extends Fragment {
-    public static String TAG = HomeView.class.getName();
+    public static final String TAG = HomeView.class.getName();
 
     public HomeView() {
         // Required empty public constructor
