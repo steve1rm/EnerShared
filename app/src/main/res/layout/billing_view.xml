@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context="me.androidbox.enershared.billing.BillingView">
 
+    <TextView
+        android:id="@+id/tvBillingTitle"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/billing_summary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/title_summary" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvBilling"
         android:layout_width="0dp"
@@ -12,7 +22,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmBilling"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBillingTitle"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintHorizontal_weight="1"
         tools:listitem="@layout/billing_item" />

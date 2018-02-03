@@ -8,5 +8,7 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="billing_summary">Billing Summary</string>
+    <string name="last_billing">Last Billing</string>
 </resources>
 
