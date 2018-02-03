@@ -27,7 +27,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.tbHome);
+        toolbar.setTitle(R.string.home);
         setSupportActionBar(toolbar);
 
         final NavigationView navigationView = findViewById(R.id.nvHome);
@@ -105,8 +106,7 @@ public class HomeActivity extends AppCompatActivity {
                 item -> {
                     selectDrawerItem(item);
                     return true;
-                }
-        );
+                });
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
