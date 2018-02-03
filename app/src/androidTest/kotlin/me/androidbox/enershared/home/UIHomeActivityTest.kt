@@ -13,7 +13,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
 class UIHomeActivityTest {
 
     @Rule
@@ -29,8 +28,6 @@ class UIHomeActivityTest {
     @Test
     fun testHomeActivityIsDisplayedOnStarting() {
         homeActivity.launchActivity(Intent())
-
-       // onView(withId(R.id.tbHome)).check(matches(withText(R.string.home)))
 
         onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.tbHome))))
                 .check(matches(withText(R.string.home)))
