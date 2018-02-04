@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import me.androidbox.enershared.R;
 import me.androidbox.enershared.billing.BillingView;
+import me.androidbox.enershared.payment.PaymentView;
 import me.androidbox.enershared.trading.TradingView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -67,6 +68,11 @@ public class HomeActivity extends AppCompatActivity {
                 tag = TradingView.TAG;
                 break;
 
+            case R.id.menuPayment:
+                fragment = PaymentView.newInstance();
+                tag = PaymentView.TAG;
+                break;
+
             default:
                 fragment = HomeView.newInstance();
                 tag = HomeView.TAG;
@@ -75,8 +81,7 @@ public class HomeActivity extends AppCompatActivity {
 
         commitFragmentTransaction(fragment, tag);
 
-        menuItem.setCheckable(true);
-        setTitle(menuItem.getTitle());
+        toolbar.setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
     }
 

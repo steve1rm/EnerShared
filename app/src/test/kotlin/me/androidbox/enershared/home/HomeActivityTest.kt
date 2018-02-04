@@ -4,6 +4,7 @@ import android.support.v7.view.menu.MenuBuilder
 import android.view.Menu
 import me.androidbox.enershared.R
 import me.androidbox.enershared.billing.BillingView
+import me.androidbox.enershared.payment.PaymentView
 import me.androidbox.enershared.trading.TradingView
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -81,6 +82,17 @@ class HomeActivityTest: BaseRobolectricTestRunner() {
 
         assertThat(homeActivity.supportFragmentManager.findFragmentByTag(TradingView.TAG).tag,
                 `is`(TradingView.TAG))
+    }
+
+    @Test
+    fun testSelectDrawerItemStartsPaymentFragment() {
+        val menu = menuBuilder
+        val item = menu.add(Menu.NONE, R.id.menuPayment, Menu.NONE, R.string.payment)
+
+        homeActivity.selectDrawerItem(item)
+
+        assertThat(homeActivity.supportFragmentManager.findFragmentByTag(PaymentView.TAG).tag,
+        `is`(PaymentView.TAG))
     }
 
     @Test

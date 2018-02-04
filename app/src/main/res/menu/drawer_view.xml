@@ -5,16 +5,25 @@
             android:id="@+id/home"
             android:title="@string/home"
             android:icon="@android:drawable/ic_lock_silent_mode"
-            android:checked="true"/>
+            android:checked="true"
+            android:checkable="true"/>
 
         <item
             android:id="@+id/menuTrading"
             android:title="@string/trading"
-            android:icon="@android:drawable/ic_menu_today"/>
+            android:icon="@android:drawable/ic_menu_today"
+            android:checkable="true"/>
 
         <item
             android:id="@+id/menuBilling"
             android:title="@string/billing"
-            android:icon="@android:drawable/ic_menu_month"/>
+            android:icon="@android:drawable/ic_menu_month"
+            android:checkable="true"/>
+
+        <item
+            android:id="@+id/menuPayment"
+            android:title="@string/payment"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:checkable="true"/>
     </group>
 </menu>
