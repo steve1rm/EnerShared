@@ -11,7 +11,7 @@ public class BillingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_billing);
+        setContentView(R.layout.billing_container);
 
         final FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();

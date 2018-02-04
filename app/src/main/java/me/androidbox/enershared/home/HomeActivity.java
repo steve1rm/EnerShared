@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home_container);
 
         toolbar = findViewById(R.id.tbHome);
         toolbar.setTitle(R.string.home);
