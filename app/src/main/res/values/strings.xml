@@ -10,9 +10,6 @@
     <string name="confirm">Confirm</string>
     <string name="billing_summary">Billing Summary</string>
     <string name="last_billing">Last Billing Payment</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="payment">Payment</string>
 </resources>
 

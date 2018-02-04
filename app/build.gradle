@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.vanniktech.android.junit.jacoco'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -37,8 +38,5 @@ junitJacoco {
     jacocoVersion = '0.8.0' // type String
     includeNoLocationClasses = true // type boolean
 }
-apply from: "dependencies.gradle"
 
-dependencies {
-    implementation 'com.android.support:support-v4:27.+'
-}
+apply from: "dependencies.gradle"
