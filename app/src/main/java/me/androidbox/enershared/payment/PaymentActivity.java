@@ -12,12 +12,14 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final FragmentTransaction fragmentTransaction
-                = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(
-                R.id.payment_view_container,
-                PaymentView.newInstance(),
-                PaymentView.TAG);
-        fragmentTransaction.commit();
+        if(getSupportFragmentManager().findFragmentByTag(PaymentView.TAG) == null) {
+            final FragmentTransaction fragmentTransaction
+                    = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(
+                    R.id.payment_view_container,
+                    PaymentView.newInstance(),
+                    PaymentView.TAG);
+            fragmentTransaction.commit();
+        }
     }
 }

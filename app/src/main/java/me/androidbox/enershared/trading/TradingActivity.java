@@ -13,9 +13,14 @@ public class TradingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trading_container);
 
-        final FragmentTransaction fragmentTransaction
-                = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.trading_view_container, TradingView.newInstance(), TradingView.TAG);
-        fragmentTransaction.commit();
+        if(getSupportFragmentManager().findFragmentByTag(TradingView.TAG) == null) {
+            final FragmentTransaction fragmentTransaction
+                    = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(
+                    R.id.trading_view_container,
+                    TradingView.newInstance(),
+                    TradingView.TAG);
+            fragmentTransaction.commit();
+        }
     }
 }

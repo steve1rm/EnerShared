@@ -1,4 +1,4 @@
-package me.androidbox.enershared.billing;
+package me.androidbox.enershared.billing
 
 import android.content.Intent
 import android.support.test.espresso.Espresso.onView

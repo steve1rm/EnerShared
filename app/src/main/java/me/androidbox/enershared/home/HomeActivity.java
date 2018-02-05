@@ -86,10 +86,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void commitFragmentTransaction(final Fragment fragment, final String tag) {
-        final FragmentTransaction fragmentTransaction
-                = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.home_view_container, fragment, tag);
-        fragmentTransaction.commit();
+        if(getSupportFragmentManager().findFragmentByTag(tag) == null) {
+            final FragmentTransaction fragmentTransaction
+                    = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.home_view_container, fragment, tag);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
