@@ -13,9 +13,11 @@ public class BillingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.billing_container);
 
-        final FragmentTransaction fragmentTransaction =
-                getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.billing_view_container, BillingView.newInstance(), BillingView.TAG);
-        fragmentTransaction.commit();
+        if(getSupportFragmentManager().findFragmentByTag(BillingView.TAG) == null) {
+            final FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.billing_view_container, BillingView.newInstance(), BillingView.TAG);
+            fragmentTransaction.commit();
+        }
     }
 }
