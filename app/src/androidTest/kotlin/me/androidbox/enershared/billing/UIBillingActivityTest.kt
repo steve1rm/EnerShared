@@ -31,14 +31,14 @@ class UIBillingActivityTest {
     fun testBillActivityIsDisplayed() {
         billingActivity.launchActivity(Intent())
 
-        checkWeOurOnTheHomeScreen()
+        checkTheHomeScreenIsDisplayed()
         openNavigationDrawer()
-        checkOpenNavigationDrawerIsOpen()
+        checkNavigationDrawerIsOpened()
         tapOnBillingItem()
-        checkThatWeAreOnBillingScreen()
+        checkTheBillingScreenIsDisplayed()
     }
 
-    private fun checkWeOurOnTheHomeScreen() {
+    private fun checkTheHomeScreenIsDisplayed() {
         onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.tbHome))))
                 .check(matches(withText(R.string.home)))
     }
@@ -47,7 +47,7 @@ class UIBillingActivityTest {
         onView(withId(R.id.homeDrawerLayout)).perform(DrawerActions.open())
     }
 
-    private fun checkOpenNavigationDrawerIsOpen() {
+    private fun checkNavigationDrawerIsOpened() {
         onView(withId(R.id.homeDrawerLayout)).check(matches(isOpen()))
     }
 
@@ -55,7 +55,7 @@ class UIBillingActivityTest {
         onView(withId(R.id.nvHome)).perform(NavigationViewActions.navigateTo(R.id.menuBilling))
     }
 
-    private fun checkThatWeAreOnBillingScreen() {
+    private fun checkTheBillingScreenIsDisplayed() {
         onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.tbHome))))
                 .check(matches(withText(R.string.billing)))
     }
