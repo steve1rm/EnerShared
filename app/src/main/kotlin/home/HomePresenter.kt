@@ -1,7 +1,8 @@
 package home
 
-interface HomePresenter {
-    fun initialize(homeViewContract: HomeViewContract)
-    fun freeResources()
+import me.androidbox.enershared.core.BasePresenter
+
+interface HomePresenter: BasePresenter<HomeViewContract> {
     fun getCustomerDetails()
 }
+
