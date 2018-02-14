@@ -42,7 +42,7 @@ public class HomeView extends Fragment implements HomeViewContract {
                 .inject(HomeView.this);
 
         homePresenter.attachView(HomeView.this);
-        
+
         return view;
     }
 
