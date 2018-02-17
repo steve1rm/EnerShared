@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-// apply plugin: 'com.vanniktech.android.junit.jacoco'
+apply plugin: 'com.vanniktech.android.junit.jacoco'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco'
@@ -16,10 +16,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            debuggable true
+            minifyEnabled false
             testCoverageEnabled true
             applicationIdSuffix = ".debug"
         }
@@ -46,7 +48,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
     def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
+    def mainSrc = ["${project.projectDir}/src/main/java", "${project.projectDir}/src/main/kotlin"]
 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])

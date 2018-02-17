@@ -28,8 +28,22 @@ class PaymentActivityTest: BaseRobolectricTestRunner() {
 
     @Test
     fun testPaymentFragmentHasStarted() {
-        val actualPaymentView = paymentActivity.supportFragmentManager.findFragmentByTag(PaymentView.TAG)
+        val actualPaymentView = paymentActivity
+                .supportFragmentManager
+                .findFragmentByTag(PaymentView.TAG)
 
         assertThat(actualPaymentView.tag, `is`(PaymentView.TAG))
     }
+
+    @Test
+    fun testPaymentFragment_doNotCommit_WhenAlreadyAttached() {
+        paymentActivity.recreate()
+
+        val actualFragment = paymentActivity
+                .supportFragmentManager
+                .findFragmentByTag(PaymentView.TAG)
+
+        assertThat(actualFragment.tag, `is`(PaymentView.TAG))
+    }
+
 }
