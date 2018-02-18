@@ -6,5 +6,10 @@
     <string name="engershared">EngerShared</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="billing_summary">Billing Summary</string>
+    <string name="last_billing">Last Billing Payment</string>
+    <string name="payment">Payment</string>
 </resources>
 

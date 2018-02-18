@@ -1,4 +1,4 @@
-package me.androidbox.enershared.trading;
+package me.androidbox.enershared.payment;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -6,20 +6,22 @@ import android.os.Bundle;
 
 import me.androidbox.enershared.R;
 
-public class TradingActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.trading_container);
+        setContentView(R.layout.payment_container);
 
-        if(getSupportFragmentManager().findFragmentByTag(TradingView.TAG) == null) {
+        if(getSupportFragmentManager().findFragmentByTag(PaymentView.TAG) == null) {
             final FragmentTransaction fragmentTransaction
                     = getSupportFragmentManager().beginTransaction();
+
             fragmentTransaction.add(
-                    R.id.trading_view_container,
-                    TradingView.newInstance(),
-                    TradingView.TAG);
+                    R.id.payment_view_container,
+                    PaymentView.newInstance(),
+                    PaymentView.TAG);
+
             fragmentTransaction.commit();
         }
     }

@@ -3,4 +3,5 @@
     <dimen name="name_margin_start">8dp</dimen>
     <dimen name="navigation_header_height">192dp</dimen>
     <dimen name="navigation_header_padding">16dp</dimen>
+    <dimen name="title_summary_text_size">22sp</dimen>
 </resources>

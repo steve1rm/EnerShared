@@ -1,8 +1,8 @@
 package me.androidbox.enershared.trading
 
-import org.hamcrest.core.Is.`is`
-import org.hamcrest.core.IsNull.notNullValue
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.notNullValue
 import org.junit.Before
 import org.junit.Test
 import org.robolectric.Robolectric
@@ -29,6 +29,16 @@ class TradingActivityTest: BaseRobolectricTestRunner() {
                 .supportFragmentManager.findFragmentByTag(TradingView.TAG)
 
         assertThat(actualFragment.tag, `is`(TradingView.TAG))
+    }
 
+    @Test
+    fun testBillingFragment_doNotCommit_WhenAlreadyAttached() {
+        activityController.get().recreate()
+
+        val actualFragment = activityController.get()
+                .supportFragmentManager
+                .findFragmentByTag(TradingView.TAG)
+
+        assertThat(actualFragment.tag, `is`(TradingView.TAG))
     }
 }
