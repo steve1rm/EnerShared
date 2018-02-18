@@ -11,6 +11,8 @@ import android.support.test.rule.ActivityTestRule
 import android.widget.TextView
 import me.androidbox.enershared.R
 import me.androidbox.enershared.home.HomeActivity
+import me.androidbox.enershared.support.BillingScreen
+import me.androidbox.enershared.support.HomeScreen
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Before
@@ -31,32 +33,13 @@ class UIBillingActivityTest {
     fun testBillActivityIsDisplayed() {
         billingActivity.launchActivity(Intent())
 
-        checkTheHomeScreenIsDisplayed()
-        openNavigationDrawer()
-        checkNavigationDrawerIsOpened()
-        tapOnBillingItem()
-        checkTheBillingScreenIsDisplayed()
-    }
+        HomeScreen
+                .whileOnHomePage()
+                .openNavigationDrawer()
+                .isNavigationDrawerOpen()
+                .tapOnBillingMenu()
 
-    private fun checkTheHomeScreenIsDisplayed() {
-        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.tbHome))))
-                .check(matches(withText(R.string.home)))
-    }
-
-    private fun openNavigationDrawer() {
-        onView(withId(R.id.homeDrawerLayout)).perform(DrawerActions.open())
-    }
-
-    private fun checkNavigationDrawerIsOpened() {
-        onView(withId(R.id.homeDrawerLayout)).check(matches(isOpen()))
-    }
-
-    private fun tapOnBillingItem() {
-        onView(withId(R.id.nvHome)).perform(NavigationViewActions.navigateTo(R.id.menuBilling))
-    }
-
-    private fun checkTheBillingScreenIsDisplayed() {
-        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.tbHome))))
-                .check(matches(withText(R.string.billing)))
+        BillingScreen
+                .whileOnBillingScreen()
     }
 }
