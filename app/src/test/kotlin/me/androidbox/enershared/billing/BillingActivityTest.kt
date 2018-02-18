@@ -34,7 +34,7 @@ class BillingActivityTest: BaseRobolectricTestRunner() {
     }
 
     @Test
-    fun testBillingFragment_doNotCommit_WhenAlreadyAttached() {
+    fun testBillingFragment_doNotCommit_whenAlreadyAttached() {
         billingActivity.recreate()
 
         val actualFragment = billingActivity
