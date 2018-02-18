@@ -1,6 +1,5 @@
 package me.androidbox.enershared.core
 
-import org.jetbrains.annotations.Nullable
 import java.lang.ref.WeakReference
 
 open class BasePresenterImp<V>: BasePresenter<V> {
@@ -19,7 +18,6 @@ open class BasePresenterImp<V>: BasePresenter<V> {
         return viewReference != null && viewReference?.get() != null
     }
 
-    @Nullable
     override fun getView(): V? {
         return viewReference?.get()
     }

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import me.androidbox.enershared.R;
 import me.androidbox.enershared.billing.BillingView;
+import me.androidbox.enershared.payment.PaymentView;
 import me.androidbox.enershared.trading.TradingView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,9 +26,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home_container);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.tbHome);
+        toolbar.setTitle(R.string.home);
         setSupportActionBar(toolbar);
 
         final NavigationView navigationView = findViewById(R.id.nvHome);
@@ -66,6 +68,11 @@ public class HomeActivity extends AppCompatActivity {
                 tag = TradingView.TAG;
                 break;
 
+            case R.id.menuPayment:
+                fragment = PaymentView.newInstance();
+                tag = PaymentView.TAG;
+                break;
+
             default:
                 fragment = HomeView.newInstance();
                 tag = HomeView.TAG;
@@ -74,16 +81,17 @@ public class HomeActivity extends AppCompatActivity {
 
         commitFragmentTransaction(fragment, tag);
 
-        menuItem.setCheckable(true);
-        setTitle(menuItem.getTitle());
+        toolbar.setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
     }
 
     private void commitFragmentTransaction(final Fragment fragment, final String tag) {
-        final FragmentTransaction fragmentTransaction
-                = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.home_view_container, fragment, tag);
-        fragmentTransaction.commit();
+        if(getSupportFragmentManager().findFragmentByTag(tag) == null) {
+            final FragmentTransaction fragmentTransaction
+                    = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.home_view_container, fragment, tag);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
@@ -105,8 +113,7 @@ public class HomeActivity extends AppCompatActivity {
                 item -> {
                     selectDrawerItem(item);
                     return true;
-                }
-        );
+                });
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
