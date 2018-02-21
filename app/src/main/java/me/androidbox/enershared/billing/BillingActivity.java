@@ -1,24 +1,28 @@
 package me.androidbox.enershared.billing;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import me.androidbox.enershared.R;
-import me.androidbox.enershared.core.FragmentRetriever;
-import me.androidbox.enershared.core.FragmentRetrieverImp;
+import me.androidbox.enershared.core.FragmentManagerRetriever;
+import me.androidbox.enershared.core.FragmentManagerRetrieverImp;
+import timber.log.Timber;
 
 public class BillingActivity extends AppCompatActivity {
+    FragmentManagerRetriever fragmentRetriever = new FragmentManagerRetrieverImp();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.billing_container);
 
-        FragmentRetriever fragmentRetriever = new FragmentRetrieverImp();
+        final FragmentManager fragmentManager = fragmentRetriever.getFragmentManager(BillingActivity.this);
 
-        if(fragmentRetriever.getFragment(getSupportFragmentManager(), BillingView.TAG) == null) {
+        if(fragmentManager.findFragmentByTag(BillingView.TAG) == null) {
             final FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
+                    fragmentManager.beginTransaction();
 
             fragmentTransaction.add(
                     R.id.billing_view_container,
@@ -26,6 +30,9 @@ public class BillingActivity extends AppCompatActivity {
                     BillingView.TAG);
 
             fragmentTransaction.commit();
+        }
+        else {
+            Timber.w("Already attached");
         }
     }
 }
