@@ -1,11 +1,12 @@
 package me.androidbox.enershared.billing;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import me.androidbox.enershared.R;
-import timber.log.Timber;
+import me.androidbox.enershared.core.FragmentRetriever;
+import me.androidbox.enershared.core.FragmentRetrieverImp;
 
 public class BillingActivity extends AppCompatActivity {
     @Override
@@ -13,7 +14,9 @@ public class BillingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.billing_container);
 
-        if(getSupportFragmentManager().findFragmentByTag(BillingView.TAG) == null) {
+        FragmentRetriever fragmentRetriever = new FragmentRetrieverImp();
+
+        if(fragmentRetriever.getFragment(getSupportFragmentManager(), BillingView.TAG) == null) {
             final FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
 
