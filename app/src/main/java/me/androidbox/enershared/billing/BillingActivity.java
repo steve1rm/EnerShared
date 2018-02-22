@@ -18,7 +18,8 @@ public class BillingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.billing_container);
 
-        final FragmentManager fragmentManager = fragmentRetriever.getFragmentManager(BillingActivity.this);
+        final FragmentManager fragmentManager
+                = fragmentRetriever.getFragmentManager(BillingActivity.this);
 
         if(fragmentManager.findFragmentByTag(BillingView.TAG) == null) {
             final FragmentTransaction fragmentTransaction =

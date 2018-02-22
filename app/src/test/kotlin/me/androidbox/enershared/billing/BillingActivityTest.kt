@@ -1,6 +1,5 @@
 package me.androidbox.enershared.billing
 
-import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import com.nhaarman.mockito_kotlin.*
@@ -30,6 +29,8 @@ class BillingActivityTest: BaseRobolectricTestRunner() {
 
     @Test
     fun testBillingFragmentHasStarted() {
+        billingActivityController.create()
+
         val actualFragment = billingActivityController.get()
                 .supportFragmentManager
                 .findFragmentByTag(BillingView.TAG)
@@ -38,15 +39,13 @@ class BillingActivityTest: BaseRobolectricTestRunner() {
     }
 
     @Test
-    fun testBillingFragment_doNotComment_whenAlreadyAttached() {
-
-    }
-
-    @Test
     fun testBillingFragment_commit_whenNotAttached() {
         val fragmentRetriever = mock<FragmentManagerRetriever>()
         val fragmentManager = mock<FragmentManager>()
         val fragmentTransaction = mock<FragmentTransaction>()
+        val fragmentManagerOrder = inOrder(fragmentManager)
+        val fragmentTransactionOrder = inOrder(fragmentTransaction)
+
         billingActivityController.get().fragmentRetriever = fragmentRetriever
 
         whenever(fragmentRetriever.getFragmentManager(billingActivityController.get()))
@@ -60,20 +59,33 @@ class BillingActivityTest: BaseRobolectricTestRunner() {
 
         verify(fragmentRetriever).getFragmentManager(billingActivityController.get())
         verifyNoMoreInteractions(fragmentRetriever)
-        verify(fragmentManager).findFragmentByTag(BillingView.TAG)
-        verify(fragmentManager).beginTransaction()
-        verifyNoMoreInteractions(fragmentManager)
-        verify(fragmentTransaction).add(eq(R.id.billing_view_container), any<BillingView>(), eq(BillingView.TAG))
-        verify(fragmentTransaction).commit()
-        verifyNoMoreInteractions(fragmentTransaction)
 
-/*
-        inOrder(
-                fragmentRetriever.getFragmentManager(billingActivityController.get()),
-                fragmentManager.findFragmentByTag(BillingView.TAG),
-                fragmentTransaction.add(R.id.billing_view_container, BillingView.newInstance(), BillingView.TAG),
-                fragmentTransaction.commit())
-                .verifyNoMoreInteractions()
-*/
+        fragmentManagerOrder.verify(fragmentManager).findFragmentByTag(BillingView.TAG)
+        fragmentManagerOrder.verify(fragmentManager).beginTransaction()
+        fragmentManagerOrder.verifyNoMoreInteractions()
+
+        fragmentTransactionOrder.verify(fragmentTransaction).add(
+                eq(R.id.billing_view_container), any<BillingView>(), eq(BillingView.TAG))
+        fragmentTransactionOrder.verify(fragmentTransaction).commit()
+        fragmentTransactionOrder.verifyNoMoreInteractions()
+    }
+
+    @Test
+    fun testBillingFragment_doNotComment_whenAlreadyAttached() {
+        val fragmentManagerRetriever = mock<FragmentManagerRetriever>()
+        val fragmentManager = mock<FragmentManager>()
+        billingActivityController.get().fragmentRetriever = fragmentManagerRetriever
+
+        whenever(fragmentManagerRetriever.getFragmentManager(billingActivityController.get()))
+                .thenReturn(fragmentManager)
+        whenever(fragmentManager.findFragmentByTag(BillingView.TAG))
+                .thenReturn(BillingView.newInstance())
+
+        billingActivityController.create()
+
+        verify(fragmentManagerRetriever).getFragmentManager(billingActivityController.get())
+        verifyNoMoreInteractions(fragmentManagerRetriever)
+        verify(fragmentManager).findFragmentByTag(BillingView.TAG)
+        verifyNoMoreInteractions(fragmentManager)
     }
 }
